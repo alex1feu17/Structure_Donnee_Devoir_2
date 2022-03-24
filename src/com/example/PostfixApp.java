@@ -7,6 +7,7 @@ public class PostfixApp {
     public static void main(String[] args) throws IOException
     {
         String input;
+        String outputPost;
         int output;
 
         while(true)
@@ -19,8 +20,9 @@ public class PostfixApp {
                 break;
 
             ParsePost aParser = new ParsePost(input);
+            outputPost = aParser.doPost();
             output = aParser.doParse();
-            System.out.println("Sortie 1 : " );
+            System.out.println("Sortie 1 : " + outputPost);
             System.out.println("Sortie 2 : " + output);
         }
     }

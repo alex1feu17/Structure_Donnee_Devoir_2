@@ -4,9 +4,49 @@ public class ParsePost {
     private StackX theStack;
     private String input;
 
-    public ParsePost(String s)
-    {
+    public ParsePost(String s) {
         input = s;
+    }
+
+    public String doPost()
+    {
+        String expression = input;
+        int compteur = 0;
+        char ch[] = new char[expression.length()];
+        for (int j=0; j<expression.length(); j++)
+        {
+            if(expression.charAt(j) =='+'|| expression.charAt(j) =='-'|| expression.charAt(j) =='*'
+                    || expression.charAt(j) =='/' || expression.charAt(j) =='$')
+            {
+                ch[compteur] = expression.charAt(j);
+                compteur++;
+            }
+        }
+        char chFinal[] = new char[expression.length()];
+        expression = expression.replaceAll("[^0-9]+", "");
+
+
+        compteur = 0;
+        int compteur2 = 0;
+
+        for(int i=0; i<chFinal.length; i++)
+        {
+            if(expression.charAt(i)=='1'|| expression.charAt(i)=='2'|| expression.charAt(i)=='3'|| expression.charAt(i)=='4'|| expression.charAt(i)==
+                '5'|| expression.charAt(i)=='6'|| expression.charAt(i)=='7'|| expression.charAt(i)=='8'|| expression.charAt(i)=='9')
+            {
+                chFinal[compteur]=expression.charAt(i);
+                compteur++;
+            }
+            if(compteur==2)
+            {
+                chFinal[compteur] = ch[compteur2];
+                compteur2 ++;
+
+            }
+
+        }
+        System.out.println(chFinal);
+        return expression;
     }
     public int doParse()
     {
@@ -20,7 +60,7 @@ public class ParsePost {
             ch = input.charAt(j);
             theStack.displayStack(""+ch+" ");
 
-            if(ch >= '0' && ch <= '9')
+            if(ch >= '0')
                 theStack.push( (int)(ch-'0') );
             else
             {
