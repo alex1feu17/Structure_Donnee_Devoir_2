@@ -13,7 +13,6 @@ public class PostfixApp {
         while(true)
         {
             System.out.print("Entrer une expression : ");
-            System.out.flush();
             input = getString();
 
             if( input.equals("") )
@@ -22,6 +21,7 @@ public class PostfixApp {
             ParsePost aParser = new ParsePost(input);
             outputPost = aParser.doPost();
             output = aParser.doParse();
+
             System.out.println("Sortie 1 : " + outputPost);
             System.out.println("Sortie 2 : " + output);
         }

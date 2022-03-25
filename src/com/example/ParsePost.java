@@ -23,30 +23,33 @@ public class ParsePost {
             }
         }
         char chFinal[] = new char[expression.length()];
-        expression = expression.replaceAll("[^0-9]+", "");
+        expression = expression.replaceAll("[^0-9]+", " ");
 
 
         compteur = 0;
         int compteur2 = 0;
 
-        for(int i=0; i<chFinal.length; i++)
-        {
-            if(expression.charAt(i)=='1'|| expression.charAt(i)=='2'|| expression.charAt(i)=='3'|| expression.charAt(i)=='4'|| expression.charAt(i)==
-                '5'|| expression.charAt(i)=='6'|| expression.charAt(i)=='7'|| expression.charAt(i)=='8'|| expression.charAt(i)=='9')
-            {
-                chFinal[compteur]=expression.charAt(i);
+        for(int i=0; i<expression.length(); i++) {
+
+            if (expression.charAt(i) == '0' || expression.charAt(i) == '1' || expression.charAt(i) == '2' || expression.charAt(i) == '3' || expression.charAt(i) == '4' || expression.charAt(i) ==
+                    '5' || expression.charAt(i) == '6' || expression.charAt(i) == '7' || expression.charAt(i) == '8' || expression.charAt(i) == '9') {
+                chFinal[compteur] = expression.charAt(i);
                 compteur++;
             }
-            if(compteur==2)
-            {
+
+            if (input.charAt(i) != expression.charAt(i) && input.charAt(i) != ' ' && input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*' ||
+                    input.charAt(i) == '/' || input.charAt(i) == '$') {
                 chFinal[compteur] = ch[compteur2];
-                compteur2 ++;
+                compteur2++;
 
             }
-
         }
-        System.out.println(chFinal);
-        return expression;
+        expression = String.valueOf(chFinal);
+        expression = expression.trim();
+
+        input = expression;
+
+        return input;
     }
     public int doParse()
     {
