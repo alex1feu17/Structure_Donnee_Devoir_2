@@ -12,8 +12,11 @@ public class PostfixApp {
 
         while(true)
         {
+
             System.out.print("Entrer une expression : ");
             input = getString();
+
+            input = input.replace("", " ");
 
             if( input.equals("") )
                 break;

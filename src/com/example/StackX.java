@@ -46,8 +46,4 @@ public class StackX {
         return stackArray[n];
     }
 
-    public void displayStack(String s)
-    {
-
-    }
 }

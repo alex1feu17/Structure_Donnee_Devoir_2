@@ -1,5 +1,7 @@
 package com.example;
 
+import java.beans.Expression;
+
 public class ParsePost {
     private StackX theStack;
     private String input;
@@ -31,19 +33,37 @@ public class ParsePost {
 
         for(int i=0; i<expression.length(); i++) {
 
-            if (expression.charAt(i) == '0' || expression.charAt(i) == '1' || expression.charAt(i) == '2' || expression.charAt(i) == '3' || expression.charAt(i) == '4' || expression.charAt(i) ==
-                    '5' || expression.charAt(i) == '6' || expression.charAt(i) == '7' || expression.charAt(i) == '8' || expression.charAt(i) == '9') {
+            if (expression.charAt(i) >= '0' && expression.charAt(i)  <= '9') {
+
                 chFinal[compteur] = expression.charAt(i);
                 compteur++;
             }
 
             if (input.charAt(i) != expression.charAt(i) && input.charAt(i) != ' ' && input.charAt(i) == '+' || input.charAt(i) == '-' || input.charAt(i) == '*' ||
                     input.charAt(i) == '/' || input.charAt(i) == '$') {
+
+                if(expression.charAt(i+2) >= '0' && expression.charAt(i+2)  <= '9')
+                {
+                    try
+                    {
+                        if(expression.charAt(i+4) >= '0' && expression.charAt(i+4)  <= '9')
+                        {
+                            chFinal[compteur+2] = ch[compteur2];
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        chFinal[compteur+1] = ch[compteur2];
+                    }
+
+
+                }
                 chFinal[compteur] = ch[compteur2];
                 compteur2++;
 
             }
         }
+
         expression = String.valueOf(chFinal);
         expression = expression.trim();
 
@@ -61,14 +81,35 @@ public class ParsePost {
         for(j=0; j<input.length(); j++)
         {
             ch = input.charAt(j);
-            theStack.displayStack(""+ch+" ");
 
             if(ch >= '0')
-                theStack.push( (int)(ch-'0') );
+                try
+                {
+                    if(input.charAt(j+1) >= '0')
+                    {
+                        if(input.charAt(j+2) >= '0') {
+                            theStack.push(Integer. parseInt(ch+""+input.charAt(j+1)+input.charAt(j+2)));
+                            j=j+2;
+                        }
+                        else
+                        {
+                            theStack.push(Integer. parseInt(ch+""+input.charAt(j+1)));
+                            j++;
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    theStack.push( (int)(ch-'0') );
+                }
+
             else
             {
                 num2 = theStack.pop();
                 num1 = theStack.pop();
+                System.out.println("num1 : "+num1);
+                System.out.println("num2 : "+num2);
+
                 switch(ch)
                 {
                     case '+':
