@@ -1,27 +1,26 @@
-package com.example;
+public class StackX<T> {
 
-public class StackX {
     private int maxSize;
-    private int[] stackArray;
+    private T[] stackArray;
     private int top;
 
     public StackX(int size)
     {
         maxSize = size;
-        stackArray = new int[maxSize];
+        stackArray = (T[]) new Object[maxSize];
         top = -1;
     }
-    public void push(int j)
+    public void push(T j)
     {
         stackArray[++top] = j;
     }
 
-    public int pop()
+    public T pop()
     {
         return stackArray[top--];
     }
 
-    public int peek()
+    public T peek()
     {
         return stackArray[top];
     }
@@ -41,7 +40,7 @@ public class StackX {
         return top+1;
     }
 
-    public int peekN(int n)
+    public T peekN(int n)
     {
         return stackArray[n];
     }
